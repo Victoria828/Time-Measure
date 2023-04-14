@@ -1,0 +1,251 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  background-image: url(../img/1612796876_19-p-poluprozrachnii-goluboi-fon-20.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+table {
+  width: 100%;
+  margin: 0 auto;
+  table-layout: fixed;
+  border-spacing: 0;
+  border: none;
+}
+th,
+td,
+form {
+  text-align: center;
+}
+th {
+  font-size: 18px;
+  background: #01dfa5;
+  padding: 10px 0;
+  letter-spacing: 2px;
+}
+td {
+  padding: 6px 0;
+  empty-cells: hide;
+}
+input,
+select {
+  border-radius: 20px;
+  padding: 5px 30px;
+}
+.button-count,
+.button-count:before {
+  height: 20px;
+  display: inline-block;
+  font-size: 20px;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 20px;
+  text-align: center;
+  border-radius: 100px;
+  border: solid rgb(4, 88, 192);
+  border-width: 3px 10px;
+  outline: none;
+  opacity: 1;
+  transition: 0.6s, opacity 0s 9999999s, visibility 0s 9999999s;
+}
+.button-count {
+  position: relative;
+  padding: calc(8px + 3px - 1px) calc(15px + 10px - 1px);
+  border: 1px solid rgba(62, 153, 239, 0.5);
+  background: linear-gradient(
+      to left,
+      rgb(62, 153, 239) 1%,
+      #fff 3%,
+      rgb(44, 135, 232) 8%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgb(44, 135, 232) 92%,
+      #fff 97%,
+      rgb(62, 153, 239) 99%
+    )
+    no-repeat;
+  width: 70%;
+  letter-spacing: 0.5em;
+  font-size: 25px;
+  margin: 25px 0 15px;
+  cursor: pointer;
+}
+.button-count:before {
+  content: "COUNT";
+  position: absolute;
+  bottom: -7px;
+  left: -1px;
+  width: calc(100% - (15px + 10px - 1px) * 2);
+  background: #fff
+    linear-gradient(rgb(58, 160, 253), rgb(4, 88, 192) 60%, rgb(49, 112, 201));
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.5);
+}
+.button-count:hover {
+  -webkit-transform: scale(1.1, 1.1);
+  transform: scale(1.1, 1.1);
+}
+.button-count:hover:before {
+  border-color: #0766d8;
+  background: #fff linear-gradient(#3fadff, #0766d8 60%, #3279dd);
+}
+.button-count:focus,
+.button-count:active {
+  -webkit-transform: scale(2, 2);
+  transform: scale(2, 2);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.4s;
+}
+section {
+  padding: 1% 5%;
+}
+fieldset {
+  padding: 25px 50px 30px;
+  border: none;
+}
+.input-date,
+select {
+  display: block;
+  margin: 10px auto;
+  width: 60%;
+  text-align: center;
+  height: 40px;
+}
+.input-date,
+select {
+  color: #fff;
+  padding: 10px 25px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+    7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  outline: none;
+  background-color: #89d8d3;
+  background-image: linear-gradient(315deg, #89d8d3 0%, #03c8a8 74%);
+  border: none;
+  z-index: 1;
+}
+.input-date:after,
+select:after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  background-color: #4dccc6;
+  background-image: linear-gradient(315deg, #4dccc6 0%, #96e4df 74%);
+  box-shadow: -7px -7px 20px 0px #fff9, -4px -4px 5px 0px #fff9,
+    7px 7px 20px 0px #0002, 4px 4px 5px 0px #0001;
+  transition: all 0.3s ease;
+}
+.input-date:hover,
+select:hover {
+  color: #fff;
+}
+.input-date:hover:after,
+select:hover:after {
+  top: 0;
+  height: 100%;
+  border-radius: 20px;
+}
+.input-date:active,
+select:active {
+  top: 2px;
+}
+.input-options {
+  width: 29%;
+  margin: 10px;
+  border: none;
+  background: linear-gradient(
+    0deg,
+    rgba(255, 151, 0, 1) 0%,
+    rgba(251, 75, 2, 1) 100%
+  );
+  height: 40px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
+  letter-spacing: 0.2em;
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+    7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+
+.input-options:before,
+.input-options:after {
+  position: absolute;
+  content: "";
+  right: 0;
+  bottom: 0;
+  background: rgba(251, 75, 2, 1);
+  box-shadow: -7px -7px 20px 0px rgba(255, 255, 255, 0.9),
+    -4px -4px 5px 0px rgba(255, 255, 255, 0.9),
+    7px 7px 20px 0px rgba(0, 0, 0, 0.2), 4px 4px 5px 0px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+.input-options:before {
+  height: 0%;
+  width: 2px;
+}
+.input-options:after {
+  width: 0%;
+  height: 2px;
+}
+.input-options:hover {
+  color: rgba(251, 75, 2, 1);
+  background: transparent;
+  border: 1px solid rgba(251, 75, 2, 1);
+}
+.input-options:hover:before {
+  height: 100%;
+}
+.input-options:hover:after {
+  width: 100%;
+}
+legend,
+output,
+p {
+  font-size: 20px;
+  text-transform: uppercase;
+}
+label {
+  text-transform: lowercase;
+  font-size: 18px;
+}
+option {
+  font-size: 20px;
+}
+@media screen and (max-width: 768px) {
+  .section-top {
+    padding: 10px 0;
+  }
+  fieldset {
+    padding: 25px;
+  }
+  option {
+    font-size: 10px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .input-options {
+    font-size: 15px;
+    letter-spacing: 2px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .button-count,
+  select,
+  .input-date {
+    width: 90%;
+  }
+  fieldset {
+    padding: 25px 5px;
+  }
+  .input-options {
+    width: 50%;
+  }
+}
