@@ -1,7 +1,5 @@
-let allDays = true;
-let weekdays = true;
-let weekends = true;
-
+"use strict";
+//Початкові змінні
 const DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
 const HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
 const MINUTE_IN_MILLISECONDS = 60 * 1000;
@@ -11,10 +9,41 @@ const HOURS_IN_DAY = 24;
 const MINUTES_IN_DAY = 24 * 60;
 const SECONDS_IN_DAY = 24 * 60 * 60;
 
+// Пресети
+let week = document.querySelector(".week");
+
+week.onclick = function () {
+  let startData = new Date(document.querySelector(".start-date").value);
+  let endData = new Date(startData);
+  endData.setDate(startData.getDate() + 7);
+  document.querySelector(".end-date").valueAsDate = endData;
+};
+
+let month = document.querySelector(".month");
+
+month.onclick = function () {
+  let startData = new Date(document.querySelector(".start-date").value);
+  let endData = new Date(startData);
+  endData.setMonth(startData.getMonth() + 1);
+  document.querySelector(".end-date").valueAsDate = endData;
+};
+
+//Ввід дати
+let firstDate = document.querySelector(".start-date");
+
+firstDate.onchange = function () {
+  if (firstDate.value === "") {
+    document.querySelector(".end-date").disabled = true;
+  } else {
+    document.querySelector(".end-date").disabled = false;
+  }
+};
+
+//Функція рахування
 let buttonCount = document.querySelector(".button-count");
 
 buttonCount.onclick = function () {
-  if (weekdays) {
+  if (document.querySelector(".type_date").value === "weekday") {
     function getWorkingDays(start, end, type) {
       let result = 0;
       while (start <= end) {
@@ -37,23 +66,15 @@ buttonCount.onclick = function () {
       }
       return `${result} ${type}`;
     }
-    console.log(
-      getWorkingDays(
-        new Date(document.querySelector(".start-date").value),
-        new Date(document.querySelector(".end-date").value),
-        "days"
-      )
-    );
-    console.log(
-      getWorkingDays(
-        new Date(document.querySelector(".start-date").value),
-        new Date(document.querySelector(".end-date").value),
-        "minutes"
-      )
+
+    document.querySelector("output").innerHTML = getWorkingDays(
+      new Date(document.querySelector(".start-date").value),
+      new Date(document.querySelector(".end-date").value),
+      document.querySelector(".number_date").value
     );
   }
 
-  if (weekends) {
+  if (document.querySelector(".type_date").value === "weekend") {
     function getWeekends(start, end, type) {
       let result = 0;
       while (start <= end) {
@@ -76,23 +97,14 @@ buttonCount.onclick = function () {
       }
       return `${result} ${type}`;
     }
-    console.log(
-      getWeekends(new Date("26 Jul 2023"), new Date("30 Jul 2023"), "days")
-    );
-    console.log(
-      getWeekends(
-        new Date(document.querySelector(".start-date").value),
-        new Date(document.querySelector(".end-date").value),
-        "minutes"
-      )
+    document.querySelector("output").innerHTML = getWeekends(
+      new Date(document.querySelector(".start-date").value),
+      new Date(document.querySelector(".end-date").value),
+      document.querySelector(".number_date").value
     );
   }
-  if (allDays) {
-    function durationBetweenDates(
-      start = "2023-06-26",
-      end = "2023-06-30",
-      type = "days"
-    ) {
+  if (document.querySelector(".type_date").value === "all") {
+    function durationBetweenDates(start, end, type) {
       let x = new Date(start);
       let y = new Date(end);
 
@@ -117,33 +129,10 @@ buttonCount.onclick = function () {
       return `${result} ${type}`;
     }
 
-    console.log(
-      durationBetweenDates(
-        new Date(document.querySelector(".start-date").value),
-        new Date(document.querySelector(".end-date").value),
-        "days"
-      )
-    );
-    console.log(
-      durationBetweenDates(
-        new Date(document.querySelector(".start-date").value),
-        new Date(document.querySelector(".end-date").value),
-        "hours"
-      )
-    );
-    console.log(
-      durationBetweenDates(
-        new Date(document.querySelector(".start-date").value),
-        new Date(document.querySelector(".end-date").value),
-        "minutes"
-      )
-    );
-    console.log(
-      durationBetweenDates(
-        new Date(document.querySelector(".start-date").value),
-        new Date(document.querySelector(".end-date").value),
-        "seconds"
-      )
+    document.querySelector("output").innerHTML = durationBetweenDates(
+      new Date(document.querySelector(".start-date").value),
+      new Date(document.querySelector(".end-date").value),
+      document.querySelector(".number_date").value
     );
   }
 };

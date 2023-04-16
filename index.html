@@ -9,18 +9,20 @@
     <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
+
   <body>
     <section class="section-top">
-      <form action="#" method="post">
+      <form method="get" onsubmit="return false;">
         <fieldset>
           <legend>Select time:</legend>
-          <label for="start">Start date</label>
+          <label for=" start">Start date</label>
           <input
             class="input-date start-date"
             type="date"
             name="start"
             id="start"
             value=""
+            required
           />
           <label for="end">End date</label>
           <input
@@ -29,36 +31,37 @@
             name="end"
             id="end"
             value=""
+            disabled
           />
         </fieldset>
         <fieldset>
           <legend>Select options:</legend>
           <input
-            class="input-options"
+            class="input-options week"
             type="button"
             value="week"
             name="presets"
           />
           <input
-            class="input-options"
+            class="input-options month"
             type="button"
             value="month"
             name="presets"
           />
-          <select name="" id="">
-            <option value="">all days</option>
-            <option value="">weekdays</option>
-            <option value="">weekends</option>
+          <select name="" id="" class="type_date">
+            <option value="all">all days</option>
+            <option value="weekday">weekdays</option>
+            <option value="weekend">weekends</option>
           </select>
-          <select name="" id="">
-            <option value="">number of days</option>
-            <option value="">number of hours</option>
-            <option value="">number of minutes</option>
-            <option value="">number of seconds</option>
+          <select name="" id="" class="number_date">
+            <option class="number" value="days">number of days</option>
+            <option class="number" value="hours">number of hours</option>
+            <option class="number" value="minutes">number of minutes</option>
+            <option class="number" value="seconds">number of seconds</option>
           </select>
         </fieldset>
         <button class="button-count" type="submit">count</button>
-        <p>Result: <output name="result">-</output></p>
+        <p>Result: <output></output></p>
       </form>
     </section>
     <section>

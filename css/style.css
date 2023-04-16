@@ -88,12 +88,9 @@ select {
   border-color: #0766d8;
   background: #fff linear-gradient(#3fadff, #0766d8 60%, #3279dd);
 }
-.button-count:focus,
 .button-count:active {
   -webkit-transform: scale(2, 2);
   transform: scale(2, 2);
-  opacity: 0;
-  visibility: hidden;
   transition: 0.4s;
 }
 section {
