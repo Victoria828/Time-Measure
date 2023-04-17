@@ -42,7 +42,7 @@ firstDate.onchange = function () {
 //Функція рахування
 let buttonCount = document.querySelector(".button-count");
 
-buttonCount.onclick = function () {
+buttonCount.onclick = function calculateDateDifference() {
   if (document.querySelector(".type_date").value === "weekday") {
     function getWorkingDays(start, end, type) {
       let result = 0;
@@ -135,4 +135,15 @@ buttonCount.onclick = function () {
       document.querySelector(".number_date").value
     );
   }
+
+  let startDate = new Date(document.querySelector(".start-date").value);
+  let endDate = new Date(document.querySelector(".end-date").value);
+  const resultTable = document.querySelector(".result-table");
+  const newRow = resultTable.insertRow();
+  const startDateCell = newRow.insertCell();
+  startDateCell.textContent = startDate.toDateString();
+  const endDateCell = newRow.insertCell();
+  endDateCell.textContent = endDate.toDateString();
+  const dateDifferenceCell = newRow.insertCell();
+  dateDifferenceCell.textContent = document.querySelector("output").value;
 };
