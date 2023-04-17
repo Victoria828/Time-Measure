@@ -39,7 +39,7 @@ firstDate.onchange = function () {
   }
 };
 
-//Функція рахування
+//Функція розрахування
 let buttonCount = document.querySelector(".button-count");
 
 buttonCount.onclick = function calculateDateDifference() {
