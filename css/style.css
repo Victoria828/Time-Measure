@@ -232,8 +232,6 @@ option {
     font-size: 15px;
     letter-spacing: 2px;
   }
-}
-@media screen and (max-width: 320px) {
   .button-count,
   select,
   .input-date {

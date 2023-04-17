@@ -30,13 +30,18 @@ month.onclick = function () {
 
 //Ввід дати
 let firstDate = document.querySelector(".start-date");
+let secondDate = document.querySelector(".end-date");
 
 firstDate.onchange = function () {
   if (firstDate.value === "") {
     document.querySelector(".end-date").disabled = true;
   } else {
     document.querySelector(".end-date").disabled = false;
+    secondDate.setAttribute("min", this.value);
   }
+};
+secondDate.onchange = function () {
+  firstDate.setAttribute("max", this.value);
 };
 
 //Функція розрахування
