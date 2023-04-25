@@ -9,43 +9,67 @@ const HOURS_IN_DAY = 24;
 const MINUTES_IN_DAY = 24 * 60;
 const SECONDS_IN_DAY = 24 * 60 * 60;
 
-// Пресети
-let week = document.querySelector(".week");
-
-week.onclick = function () {
-  let startData = new Date(document.querySelector(".start-date").value);
-  let endData = new Date(startData);
-  endData.setDate(startData.getDate() + 7);
-  document.querySelector(".end-date").valueAsDate = endData;
-};
-
-let month = document.querySelector(".month");
-
-month.onclick = function () {
-  let startData = new Date(document.querySelector(".start-date").value);
-  let endData = new Date(startData);
-  endData.setMonth(startData.getMonth() + 1);
-  document.querySelector(".end-date").valueAsDate = endData;
-};
-
-//Ввід дати
 let firstDate = document.querySelector(".start-date");
 let secondDate = document.querySelector(".end-date");
 
+let resultTable = document.querySelector(".result-table");
+let rows = resultTable.rows;
+
+let firstValue = new Date(document.querySelector(".start-date").value);
+let endValue = new Date(document.querySelector(".end-date").value);
+
+let week = document.querySelector(".week");
+let month = document.querySelector(".month");
+
+let buttonCount = document.querySelector(".button-count");
+
+let output = document.querySelector("output");
+
+// Пресети
+
+//Тиждень
+
+week.onclick = function () {
+  let startData = new Date(firstDate.value);
+  let endData = new Date(startData);
+  endData.setDate(startData.getDate() + 7);
+  secondDate.valueAsDate = endData;
+  buttonCount.disabled = false;
+};
+//Місяць
+
+month.onclick = function () {
+  let startData = new Date(firstDate.value);
+  let endData = new Date(startData);
+  endData.setMonth(startData.getMonth() + 1);
+  secondDate.valueAsDate = endData;
+  buttonCount.disabled = false;
+};
+
+//Ввід дати
+
+//Початкова дата
 firstDate.onchange = function () {
   if (firstDate.value === "") {
-    document.querySelector(".end-date").disabled = true;
+    secondDate.disabled = true;
+    buttonCount.disabled = true;
   } else {
-    document.querySelector(".end-date").disabled = false;
+    secondDate.disabled = false;
     secondDate.setAttribute("min", this.value);
   }
 };
+
+//Кінцева дата
 secondDate.onchange = function () {
+  if (secondDate.value === "") {
+    buttonCount.disabled = true;
+  } else {
+    buttonCount.disabled = false;
+  }
   firstDate.setAttribute("max", this.value);
 };
 
 //Функція розрахування
-let buttonCount = document.querySelector(".button-count");
 
 buttonCount.onclick = function calculateDateDifference() {
   if (document.querySelector(".type_date").value === "weekday") {
@@ -72,9 +96,9 @@ buttonCount.onclick = function calculateDateDifference() {
       return `${result} ${type}`;
     }
 
-    document.querySelector("output").innerHTML = getWorkingDays(
-      new Date(document.querySelector(".start-date").value),
-      new Date(document.querySelector(".end-date").value),
+    output.innerHTML = getWorkingDays(
+      new Date(firstDate.value),
+      new Date(secondDate.value),
       document.querySelector(".number_date").value
     );
   }
@@ -102,9 +126,9 @@ buttonCount.onclick = function calculateDateDifference() {
       }
       return `${result} ${type}`;
     }
-    document.querySelector("output").innerHTML = getWeekends(
-      new Date(document.querySelector(".start-date").value),
-      new Date(document.querySelector(".end-date").value),
+    output.innerHTML = getWeekends(
+      new Date(firstDate.value),
+      new Date(secondDate.value),
       document.querySelector(".number_date").value
     );
   }
@@ -134,21 +158,66 @@ buttonCount.onclick = function calculateDateDifference() {
       return `${result} ${type}`;
     }
 
-    document.querySelector("output").innerHTML = durationBetweenDates(
-      new Date(document.querySelector(".start-date").value),
-      new Date(document.querySelector(".end-date").value),
+    output.innerHTML = durationBetweenDates(
+      new Date(firstDate.value),
+      new Date(secondDate.value),
       document.querySelector(".number_date").value
     );
   }
 
-  let startDate = new Date(document.querySelector(".start-date").value);
-  let endDate = new Date(document.querySelector(".end-date").value);
-  const resultTable = document.querySelector(".result-table");
-  const newRow = resultTable.insertRow();
-  const startDateCell = newRow.insertCell();
-  startDateCell.textContent = startDate.toDateString();
-  const endDateCell = newRow.insertCell();
-  endDateCell.textContent = endDate.toDateString();
-  const dateDifferenceCell = newRow.insertCell();
-  dateDifferenceCell.textContent = document.querySelector("output").value;
+  //Таблиця
+
+  resultTable.style.display = "table";
+
+  let rowCount = resultTable.rows.length;
+  if (rowCount > "10") {
+    rows[1].remove();
+  }
+
+  let data = {
+    start: new Date(firstDate.value).toDateString(),
+    end: new Date(secondDate.value).toDateString(),
+    result: output.value,
+  };
+  addResults(data.start, data.end, data.result);
+  storeToLocalStorage(data);
 };
+
+//local storage
+let resultData = [];
+let savedResults = JSON.parse(localStorage.getItem("resultData"));
+if (savedResults) {
+  for (let value of savedResults) {
+    let item = `
+    <tr class="new-row">
+      <td class="startDate">${value.start}</td>
+      <td class="endDate">${value.end}</td>
+      <td class="result">${value.result}</td>
+    </tr>
+    `;
+    resultTable.insertAdjacentHTML("beforeend", item);
+  }
+}
+
+function storeToLocalStorage(data) {
+  if (!savedResults) {
+    savedResults = [];
+  }
+  if (savedResults.length >= 10) {
+    savedResults.shift();
+  }
+
+  savedResults.push(data);
+  localStorage.setItem("resultData", JSON.stringify(savedResults));
+}
+
+function addResults(start, end, result) {
+  let item = `
+  <tr class="new-row">
+    <td class="startDate">${start}</td>
+    <td class="endDate">${end}</td>
+    <td class="result">${result}</td>
+  </tr>
+  `;
+  resultTable.insertAdjacentHTML("beforeend", item);
+}
