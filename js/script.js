@@ -197,6 +197,8 @@ if (savedResults) {
     `;
     resultTable.insertAdjacentHTML("beforeend", item);
   }
+
+  resultTable.style.display = "table";
 }
 
 function storeToLocalStorage(data) {
