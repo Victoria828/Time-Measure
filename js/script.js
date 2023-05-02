@@ -77,11 +77,6 @@ function isWeekend(date) {
   let newDate = new Date(date);
   let weekDay = newDate.getDay();
 
-  if (weekDay === 0 || weekDay === 6) {
-    return true;
-  } else {
-    return false;
-  }
   return weekDay === 0 || weekDay === 6;
 }
 
